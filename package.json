@@ -1,0 +1,16 @@
+{
+    "name": "nodejs-example",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "author": "Andras Bacsai",
+    "license": "ISC",
+    "dependencies": {
+      "fastify": "^3.14.2",
+      "fastify-cors": "^5.2.0",
+      "fastify-static": "^4.0.1"
+    }
+  }

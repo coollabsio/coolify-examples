@@ -1,1 +1,1 @@
-# Example repositories to test Coolify
+Simple Nodejs Fastify repository.
