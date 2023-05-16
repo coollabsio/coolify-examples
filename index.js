@@ -7,6 +7,11 @@ fastify.get('/', function (req, reply) {
   return { hello: "main-updates" }
 })
 
+fastify.get('/api', function (req, reply) {
+  console.log(process.env.TEST)
+  return { hello: "api" }
+})
+
 const start = async () => {
   try {
     await fastify.listen(3000, '0.0.0.0')
