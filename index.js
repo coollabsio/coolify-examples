@@ -7,9 +7,8 @@ fastify.get('/', function (req, reply) {
   return { hello: "main-updates" }
 })
 
-fastify.get('/api', function (req, reply) {
-  console.log(process.env.TEST)
-  return { hello: "api" }
+fastify.get('/health', function (req, reply) {
+  return 'OK'
 })
 
 const start = async () => {
