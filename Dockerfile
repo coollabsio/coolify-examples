@@ -25,7 +25,7 @@ RUN SKIP_GENERATE=1 pnpm install
 
 # RUN pnpm install -r --offline --prod
 RUN apt-get install libssl-dev curl libc6 -y
-RUN SKIP_GENERATE=1 pnpm build:sun
+# RUN SKIP_GENERATE=1 pnpm build:sun
 
 # install node-prune
 RUN curl -sf https://gobinaries.com/tj/node-prune | sh
