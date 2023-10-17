@@ -1,26 +1,26 @@
 {
-    "name": "nodejs-example",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-      "start": "node index.js"
-    },
-    "author": "Andras Bacsai",
-    "license": "ISC",
-    "dependencies": {
-      "prisma": "5.4.2",
-      "sharp": "0.32.6",
-      "core-js": "3.33.0",
-      "core-js-pure": "3.33.0",
-      "bufferutil": "4.0.8",
-      "es5-ext": "0.10.62",
-      "protobufjs":"7.2.5",
-      "secp256k1":"5.0.0",
-      "web3-bzz":"1.10.0",
-      "keccak": "3.0.4",
-      "fastify": "^3.14.2",
-      "fastify-cors": "^5.2.0",
-      "fastify-static": "^4.0.1"
-    }
+  "name": "nodejs-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Andras Bacsai",
+  "license": "ISC",
+  "dependencies": {
+    "prisma": "5.4.2",
+    "sharp": "0.32.6",
+    "core-js": "3.33.0",
+    "core-js-pure": "3.33.0",
+    "bufferutil": "4.0.8",
+    "es5-ext": "0.10.62",
+    "protobufjs": "7.2.5",
+    "secp256k1": "5.0.0",
+    "web3-bzz": "1.10.0",
+    "keccak": "3.0.4",
+    "fastify": "^3.14.2",
+    "fastify-cors": "^5.2.0",
+    "fastify-static": "^4.0.1"
   }
+}
