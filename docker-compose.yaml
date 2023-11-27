@@ -10,9 +10,11 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - db:/var/lib/postgresql/data
+      - db2:/var/lib/postgresql/data2
   adminer:
     image: adminer
     restart: always
 volumes:
   db:
+  db2:
     
