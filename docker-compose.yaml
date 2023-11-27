@@ -12,4 +12,3 @@ services:
   adminer:
     image: adminer
     restart: always
-
