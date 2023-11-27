@@ -1,1 +1,1 @@
-# Example repositories to test Coolify
+# Git + Docker Compose
