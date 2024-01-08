@@ -1,3 +1,3 @@
 FROM nginx:alpine
 ARG URL
-RUN curl $URL > /usr/share/nginx/html/index.html
+RUN curl -L $URL > /usr/share/nginx/html/index.html
