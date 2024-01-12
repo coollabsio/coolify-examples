@@ -1,2 +1,2 @@
-[phases.build]
+[phases.setup]
   nixPkgs = ['python310']
