@@ -1,4 +1,4 @@
-# Configuration
+# Coolify Configuration 
 
 - Set `Build Pack` to `nixpacks`
 - Set `APP_KEY`
