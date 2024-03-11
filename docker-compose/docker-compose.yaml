@@ -6,4 +6,5 @@ services:
     ports:
       - "${PORT}"
     environment:
+      - PORT=3000
       - DB_CONNECTION=mysql
