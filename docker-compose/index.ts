@@ -1,5 +1,7 @@
 const PORT = process.env.PORT || 3000;
+const HOSTNAME = process.env.HOSTNAME || "0.0.0.0"
 Bun.serve({
+    hostname: HOSTNAME,
     port: PORT,
     fetch(req) {
         const url = new URL(req.url);
@@ -13,4 +15,4 @@ Bun.serve({
         return new Response("404!");
     },
 })
-console.log(`Server running at http://localhost:${PORT}`);
+console.log(`Server running at http://${HOSTNAME}:${PORT}`);
