@@ -3,5 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    ports:
+      - "${PORT}"
     environment:
       - DB_CONNECTION=mysql
