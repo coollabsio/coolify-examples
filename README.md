@@ -4,6 +4,7 @@ This repository contains examples of how to deploy applications using Coolify.
 - [x] Static
 - [x] Node.js
 - [x] Dockerfile
+- [x] Docker Compose
 - [x] Nuxt
 - [x] Bun
 - [ ] Rails 
@@ -13,6 +14,5 @@ This repository contains examples of how to deploy applications using Coolify.
 - [ ] SvelteKit-static
 - [ ] Next.js
 - [ ] Turborepo
-- [ ] Docker Compose
 - [ ] PHP
 - [ ] React/Preact/Vite/Vue/Svelte
