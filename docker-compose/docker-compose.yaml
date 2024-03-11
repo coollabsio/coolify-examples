@@ -1,0 +1,7 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DB_CONNECTION=mysql
