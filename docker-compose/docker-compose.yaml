@@ -7,4 +7,11 @@ services:
       - "3000"
     environment:
       - PORT=3000
-      - DB_CONNECTION=mysql
+      - DB_CONNECTION=postgres
+  database:
+    image: postgres:14-alpine
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=database
+      - POSTGRES_PASSWORD=password
