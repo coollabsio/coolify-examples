@@ -7,6 +7,7 @@ This repository contains examples of how to deploy applications using Coolify.
 - [x] Docker Compose
 - [x] Nuxt
 - [x] Bun
+- [x] Astro
 - [ ] Rails 
 - [ ] Django
 - [ ] Laravel
