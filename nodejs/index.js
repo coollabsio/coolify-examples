@@ -6,7 +6,7 @@ fastify.get('/', function (req, reply) {
   return { hello: "from nodejs" }
 })
 fastify.get('/env', function (req, reply) {
-  return { env: process.env.NODE_ENV }
+  return { env: process.env }
 })
 
 fastify.get('/health', function (req, reply) {
