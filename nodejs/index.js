@@ -8,6 +8,10 @@ fastify.get('/', function (req, reply) {
 fastify.get('/env', function (req, reply) {
   return { env: process.env }
 })
+fastify.get('/env/:env', function (req, reply) {
+  const env = request.params.env
+  return { env: process.env[env] }
+})
 
 fastify.get('/health', function (req, reply) {
   return 'OK'
