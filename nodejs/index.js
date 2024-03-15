@@ -9,7 +9,7 @@ fastify.get('/env', function (req, reply) {
   return { env: process.env }
 })
 fastify.get('/env/:env', function (req, reply) {
-  const env = request.params.env
+  const env = req.params.env
   return { env: process.env[env] }
 })
 
