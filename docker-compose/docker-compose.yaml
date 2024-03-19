@@ -18,6 +18,10 @@ services:
         source: ./app
         target: /app
         read_only: true
+      - type: bind
+        source: /1234
+        target: /123
+        read_only: false
     environment:
       - POSTGRES_DB=database
       - POSTGRES_PASSWORD=password
