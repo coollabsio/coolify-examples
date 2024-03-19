@@ -12,6 +12,8 @@ services:
     image: postgres:14-alpine
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./asd:/asd
+      - /asdf:/asdf
       - type: bind
         source: ./app
         target: /app
