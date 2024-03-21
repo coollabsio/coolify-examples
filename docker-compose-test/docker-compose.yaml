@@ -8,16 +8,16 @@ services:
     ports:
       - 3002:3002
     environment:
-		# REDACTED
+
     sysctls:
-		# REDACTED
+
     restart: unless-stopped
   automation:
     build:
       context: .
       dockerfile: packages/automation/Dockerfile
       args:
-        # REDACTED
+
     network_mode: service:nordlynx
     volumes:
      - data:/data 
