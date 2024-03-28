@@ -1,5 +1,5 @@
 # Coolify Configuration 
 
-## Server build
+## Server build (NodeJS)
 - Set `Build Pack` to `nixpacks`.
 - That's all.
