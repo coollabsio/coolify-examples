@@ -1,7 +1,6 @@
 # Coolify Configuration 
 
-## Server build (`./ssr`)
-- Set `Build Pack` to `nixpacks`
-- That's all
-  
-## Static (SPA) build (`./spa`)
+## Static build (SPA)
+- Set `Build Pack` to `nixpacks`.
+- Set `Output Directory` to `out`.
+- That's all.
