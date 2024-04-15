@@ -9,7 +9,6 @@ services:
       - PORT=3000
       - DB_CONNECTION=postgres
       - TEST=${TEST}
-      - asd=interpolation
   database:
     image: postgres:14-alpine
     volumes:
