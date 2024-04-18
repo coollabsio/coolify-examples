@@ -32,7 +32,7 @@ WORKDIR /app
 # Copy package.json and pnpm-lock.yaml before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
 COPY package.json ./
-COPY pnpm-lock.yaml ./
+COPY package-lock.json ./
 
 # Install dependencies
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
