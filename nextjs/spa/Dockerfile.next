@@ -32,10 +32,9 @@ WORKDIR /app
 # Copy package.json and pnpm-lock.yaml before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
 COPY package.json ./
-COPY package-lock.json ./
 
 # Install dependencies
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 
 # Build the Next.js app
 FROM nodeenv AS builder
