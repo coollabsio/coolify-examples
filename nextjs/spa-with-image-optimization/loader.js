@@ -6,7 +6,7 @@ export default function myImageLoader({ src, width, quality }) {
         return src;
     }
     if (isLocal) {
-        const baseUrl = 'https://xoos0kk.heyandras.dev';
+        const baseUrl = 'https://gkw0c8k.arm.coolify.io';
         const fullSrc = `${baseUrl}${src}`;
         return `https://images.coollabs.io/o/${fullSrc}?width=${width}&quality=${quality || 75}`
     }
