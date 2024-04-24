@@ -5,19 +5,13 @@ export default function myImageLoader({ src, width, quality }) {
     if (isLocal && process.env.NODE_ENV === 'development') {
         return src;
     }
+    const query = new URLSearchParams();
+    if (width) query.set('width', width);
+    if (quality) query.set('quality', quality);
     if (isLocal) {
         const baseUrl = 'https://xoos0kk.heyandras.dev';
         const fullSrc = `${baseUrl}${src}`;
-        if (quality) {
-            return `https://images.coollabs.io/o/${fullSrc}?width=${width}&quality=${quality}`
-        } else { 
-            return `https://images.coollabs.io/o/${fullSrc}?width=${width}`
-        }
+        return `https://images.coollabs.io/o/${fullSrc}?${query.toString()}`;
     }
-    if (quality) {
-        return `https://images.coollabs.io/o/${src}?width=${width}&quality=${quality}`
-    } else { 
-        return `https://images.coollabs.io/o/${src}?width=${width}`
-    }
-  
+    return `https://images.coollabs.io/o/${src}?${query.toString()}`;
 }
