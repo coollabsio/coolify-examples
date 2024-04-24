@@ -6,7 +6,7 @@ export default function myImageLoader({ src, width, quality }) {
         return src;
     }
     if (isLocal) {
-        const baseUrl = 'https://coollabs.io';
+        const baseUrl = 'https://xoos0kk.heyandras.dev';
         const fullSrc = `${baseUrl}${src}`;
         return `https://images.coollabs.io/o/${encodeURIComponent(fullSrc)}?width=${width}&quality=${quality}`
     }
