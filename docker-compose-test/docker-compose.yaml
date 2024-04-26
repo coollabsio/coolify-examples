@@ -1,28 +1,5 @@
-version: '3'
 services:
-  nordlynx:
-    image: ghcr.io/bubuntux/nordlynx
-    container_name: nordlynx
-    cap_add:
-      - NET_ADMIN
-    ports:
-      - 3002:3002
-    environment:
-
-    sysctls:
-
-    restart: unless-stopped
-  automation:
-    build:
-      context: .
-      dockerfile: packages/automation/Dockerfile
-      args:
-
-    network_mode: service:nordlynx
-    volumes:
-     - data:/data 
-    depends_on:
-      - nordlynx
-volumes:
-  data:
-    external: true
+  app:
+    image: 'node'
+    labels:
+      - caddy_0.basicauth.0_cj=$2a$14$PQEq3Ql.QWIgXcMfXwm.5.4FGc6iKJjXAHez7RQdWeBhmU2CzgUA.
