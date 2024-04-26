@@ -1,5 +1,5 @@
 services:
   app:
-    image: 'node'
+    image: 'nginx'
     labels:
       - caddy_0.basicauth.0_cj=$2y$12$ci.4U63YX83CwkyUrjqxAucnmi2xXOIlEF6T/KdP9824f1Rf1iyNG
