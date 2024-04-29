@@ -1,6 +1,7 @@
 services:
   app:
     image: 'nginx'
-    labels:
-      - caddy_0.basicauth.0_cj=$2y$12$ci.4U63YX83CwkyUrjqxAucnmi2xXOIlEF6T/KdP9824f1Rf1iyNG
-      - caddy_0.basicauth.1_ck=$2a$14$JVVa2EcQjpAN9g.76K4P8.oik8U3ae4QdKg1H3MJT7OX/5zSg2kiS
+  app2:
+    image: 'nginx'
+  app3:
+    image: 'nginx'
