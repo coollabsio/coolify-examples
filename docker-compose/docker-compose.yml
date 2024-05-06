@@ -1,0 +1,11 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000"
+    environment:
+      - PORT=3000
+      - DB_CONNECTION=postgres
+      - TEST=${TEST}
