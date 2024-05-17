@@ -14,7 +14,7 @@ fastify.get('/env/:env', function (req, reply) {
 })
 
 fastify.get('/health', function (req, reply) {
-  return 'OK'
+  return 'OK from PR'
 })
 
 const start = async () => {
