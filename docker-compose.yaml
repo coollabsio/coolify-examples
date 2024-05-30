@@ -1,5 +1,0 @@
-services:
-  app:
-    image: 'nginx'
-    labels: 
-      - traefik.http.middlewares.custom-auth.basicauth.users=test:$2y$12$ci.4U63YX83CwkyUrjqxAucnmi2xXOIlEF6T/KdP9824f1Rf1iyNG
