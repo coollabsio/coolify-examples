@@ -1,5 +1,5 @@
 const PORT = process.env.PORT || 3000;
-const HOSTNAME = process.env.HOSTNAME || "0.0.0.0"
+const HOSTNAME = process.env.HOST || "0.0.0.0"
 Bun.serve({
     hostname: HOSTNAME,
     port: PORT,
