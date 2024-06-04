@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        NPM_TOKEN: ${NPM_TOKEN:?NPM_TOKEN not set}
     ports:
       - "3000"
     environment:
