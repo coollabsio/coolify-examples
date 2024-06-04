@@ -8,6 +8,6 @@ services:
   app2:
     image: 'nginx'
     labels: 
-      - traefik.http.middlewares.custom-auth.basicauth.users=test:$2y$12$ci.4U63YX83CwkyUrjqxAucnmi2xXOIlEF6T/KdP9824f1Rf1iyNG
+      - traefik.http.middlewares.custom-auth.basicauth.users=test:$2y$05$OpnNJgwdtK/PLkP.JL7Rzeikv2PB2skTZC1B3x15Zka.Vevo5ux6m
   app3:
     image: 'nginx'
