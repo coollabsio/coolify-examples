@@ -14,3 +14,5 @@ services:
     image: 'nginx'
     labels:
       - traefik.http.middlewares.custom-auth3.basicauth.users=test:$2y$05$OpnNJgwdtK/PLkP.JL7Rzeikv2PB2skTZC1B3x15Zka.Vevo5ux6m 
+  db:
+    image: 'postgres:alpine'
