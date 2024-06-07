@@ -18,3 +18,7 @@ services:
     image: 'postgres:alpine'
     volumes:
       - 'store:/store'
+
+volumes:
+  store:
+    driver: local
