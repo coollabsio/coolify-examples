@@ -19,3 +19,6 @@ services:
     volumes:
       - 'store:/store'
 
+volumes:
+  store:
+    - driver: local
