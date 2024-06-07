@@ -21,4 +21,4 @@ services:
 
 volumes:
   store:
-    - driver: local
+    driver: local
