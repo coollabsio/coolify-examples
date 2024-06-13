@@ -1,7 +1,5 @@
 # Coolify Configuration 
 
-## Static build (SPA)
+## Server build (NodeJS) with Prisma
 - Set `Build Pack` to `nixpacks`.
-- Enable `Is it a static site?`.
-- Set `Output Directory` to `out`.
 - That's all.
