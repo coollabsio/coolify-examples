@@ -18,4 +18,3 @@ This repository contains examples of how to deploy applications using Coolify.
 - [ ] Turborepo
 - [ ] PHP
 - [ ] React/Preact/Vite/Vue/Svelte
-- [ ] 
