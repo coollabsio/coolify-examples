@@ -1,5 +1,5 @@
-# Coolify Examples
-This repository contains examples of how to deploy applications using Coolify.
+# HCS Examples
+This repository contains examples of how to deploy applications using HCS.
 
 - [x] Static
 - [x] Node.js
