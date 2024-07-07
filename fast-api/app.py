@@ -2,48 +2,64 @@ from fastapi import FastAPI, HTTPException
 from fastapi.openapi.docs import get_swagger_ui_html
 from pydantic import BaseModel
 import os
+import json
 
 app = FastAPI()
 
-class HAProxyConfig(BaseModel):
+class TraefikConfig(BaseModel):
     domain: str
     backend_ip: str
     backend_port: int
-    acl_condition: str = "hdr(host)"  # Default condition to match the host header
-    bind_port: int = 80
-    check_option: str = "check"  # Default health check option
 
     class Config:
         schema_extra = {
             "example": {
                 "domain": "newdomain.hostspacecloud.com",
                 "backend_ip": "127.0.0.1",
-                "backend_port": 4000,
-                "acl_condition": "hdr(host)",
-                "bind_port": 80,
-                "check_option": "check"
+                "backend_port": 4000
             }
         }
 
-HAProxy_CFG = "/etc/haproxy/haproxy.cfg"
+DYNAMIC_CONFIG_DIR = "/data/coolify/proxy/dynamic/"
 
-def reload_haproxy():
-    os.system("sudo systemctl reload haproxy")
+def reload_traefik():
+    os.system("docker restart coolify-proxy")
 
-def add_domain_to_haproxy(config: HAProxyConfig):
-    with open(HAProxy_CFG, "a") as f:
-        f.write(f"\nfrontend {config.domain}_front\n")
-        f.write(f"    bind *:{config.bind_port}\n")
-        f.write(f"    acl host_{config.domain} {config.acl_condition} -i {config.domain}\n")
-        f.write(f"    use_backend {config.domain}_backend if host_{config.domain}\n\n")
-        f.write(f"backend {config.domain}_backend\n")
-        f.write(f"    server {config.domain}_server {config.backend_ip}:{config.backend_port} {config.check_option}\n")
-    reload_haproxy()
+def add_domain_to_traefik(config: TraefikConfig):
+    dynamic_config_path = os.path.join(DYNAMIC_CONFIG_DIR, f"{config.domain}.json")
+    
+    dynamic_config = {
+        "http": {
+            "routers": {
+                f"{config.domain}-router": {
+                    "rule": f"Host(`{config.domain}`)",
+                    "service": f"{config.domain}-service",
+                    "entryPoints": ["http"]
+                }
+            },
+            "services": {
+                f"{config.domain}-service": {
+                    "loadBalancer": {
+                        "servers": [
+                            {
+                                "url": f"http://{config.backend_ip}:{config.backend_port}"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+
+    with open(dynamic_config_path, 'w') as f:
+        json.dump(dynamic_config, f, indent=4)
+
+    reload_traefik()
 
 @app.post("/add-domain/")
-def add_domain(config: HAProxyConfig):
+def add_domain(config: TraefikConfig):
     try:
-        add_domain_to_haproxy(config)
+        add_domain_to_traefik(config)
         return {"message": "Domain added successfully!"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
