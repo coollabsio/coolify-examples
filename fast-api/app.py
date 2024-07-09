@@ -2,19 +2,20 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import os
 import yaml
-import subprocess
 
 app = FastAPI()
 
 class TraefikConfig(BaseModel):
     domain: str
     port: int
+    app_name: str
 
     class Config:
         schema_extra = {
             "example": {
                 "domain": "newdomain.hostspacecloud.com",
-                "port": 4000
+                "port": 4000,
+                "app_name": "myapp"
             }
         }
 
@@ -24,22 +25,7 @@ DOCKER_NETWORK_IP = os.getenv("DOCKER_NETWORK_IP", "host.docker.internal")
 def reload_traefik():
     os.system("docker restart coolify-proxy")
 
-def generate_ssl_certificate(domain: str):
-    command = [
-        "certbot", "certonly", "--standalone", "--non-interactive", "--agree-tos",
-        "--email", "cloud@hostspaceng.com", "-d", domain
-    ]
-    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if result.returncode != 0:
-        raise Exception(f"Certbot failed: {result.stderr.decode()}")
-
 def add_domain_to_traefik(config: TraefikConfig):
-    # Generate SSL certificate for the domain
-    try:
-        generate_ssl_certificate(config.domain)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to generate SSL certificate: {e}")
-
     dynamic_config_path = os.path.join(DYNAMIC_CONFIG_DIR, f"{config.domain}.yaml")
     
     dynamic_config = {
@@ -55,34 +41,26 @@ def add_domain_to_traefik(config: TraefikConfig):
                 }
             },
             "routers": {
-                "lb-http": {
+                f"{config.app_name}-http": {
                     "middlewares": ["redirect-to-https"],
                     "entryPoints": ["http"],
-                    "service": "noop",
+                    "service": config.app_name,
                     "rule": f"Host(`{config.domain}`)"
                 },
-                "lb-https": {
-                    "middlewares": ["gzip"],
+                f"{config.app_name}-https": {
                     "entryPoints": ["https"],
-                    "service": "lb-https",
+                    "service": config.app_name,
+                    "rule": f"Host(`{config.domain}`)",
                     "tls": {
-                        "certResolver": "letsencrypt"
-                    },
-                    "rule": f"Host(`{config.domain}`)"
+                        "certresolver": "letsencrypt"
+                    }
                 }
             },
             "services": {
-                "lb-https": {
+                config.app_name: {
                     "loadBalancer": {
                         "servers": [
                             {"url": f"http://{DOCKER_NETWORK_IP}:{config.port}"}
-                        ]
-                    }
-                },
-                "noop": {
-                    "loadBalancer": {
-                        "servers": [
-                            {"url": ""}
                         ]
                     }
                 }
@@ -91,7 +69,7 @@ def add_domain_to_traefik(config: TraefikConfig):
     }
 
     with open(dynamic_config_path, 'w') as f:
-        yaml.dump(dynamic_config, f)
+        yaml.dump(dynamic_config, f, default_flow_style=False)
 
     reload_traefik()
 
