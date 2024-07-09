@@ -9,19 +9,18 @@ app = FastAPI()
 class TraefikConfig(BaseModel):
     domain: str
     port: int
-    app_name: str
+    container_name: str
 
     class Config:
         schema_extra = {
             "example": {
                 "domain": "newdomain.hostspacecloud.com",
                 "port": 4000,
-                "app_name": "myapp"
+                "container_name": "myapp"
             }
         }
 
 DYNAMIC_CONFIG_DIR = os.getenv("TRAEFIK_DYNAMIC_CONFIG_DIR", "/data/coolify/proxy/dynamic/")
-DOCKER_NETWORK_IP = os.getenv("DOCKER_NETWORK_IP", "host.docker.internal")
 
 def reload_traefik():
     os.system("docker restart coolify-proxy")
@@ -42,15 +41,15 @@ def add_domain_to_traefik(config: TraefikConfig):
                 }
             },
             "routers": {
-                f"{config.app_name}-http": {
+                f"{config.container_name}-http": {
                     "middlewares": ["redirect-to-https"],
                     "entryPoints": ["http"],
-                    "service": config.app_name,
+                    "service": config.container_name,
                     "rule": f"Host(`{config.domain}`)"
                 },
-                f"{config.app_name}-https": {
+                f"{config.container_name}-https": {
                     "entryPoints": ["https"],
-                    "service": config.app_name,
+                    "service": config.container_name,
                     "rule": f"Host(`{config.domain}`)",
                     "tls": {
                         "certresolver": "letsencrypt"
@@ -58,10 +57,10 @@ def add_domain_to_traefik(config: TraefikConfig):
                 }
             },
             "services": {
-                config.app_name: {
+                config.container_name: {
                     "loadBalancer": {
                         "servers": [
-                            {"url": f"http://{DOCKER_NETWORK_IP}:{config.port}"}
+                            {"url": f"http://{config.container_name}:{config.port}"}
                         ]
                     }
                 }
@@ -84,7 +83,7 @@ def add_domain(config: TraefikConfig):
 
 @app.get("/", include_in_schema=False)
 async def root():
-    return get_swagger_ui_html(openapi_url=app.openapi_url, title=app.title + " - Swagger UI")
+    return get_swagger_ui_html(openapi_url=app.openapi_url, title="HostSpaceCloud Custom Domain Mapping")
 
 if __name__ == "__main__":
     import uvicorn
