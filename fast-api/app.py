@@ -8,16 +8,19 @@ app = FastAPI()
 class TraefikConfig(BaseModel):
     domain: str
     port: int
+    app_name: str
 
     class Config:
         schema_extra = {
             "example": {
                 "domain": "newdomain.hostspacecloud.com",
-                "port": 4000
+                "port": 4000,
+                "app_name": "myapp"
             }
         }
 
 DYNAMIC_CONFIG_DIR = os.getenv("TRAEFIK_DYNAMIC_CONFIG_DIR", "/data/coolify/proxy/dynamic/")
+DOCKER_NETWORK_IP = os.getenv("DOCKER_NETWORK_IP", "host.docker.internal")
 
 def reload_traefik():
     os.system("docker restart coolify-proxy")
@@ -38,34 +41,26 @@ def add_domain_to_traefik(config: TraefikConfig):
                 }
             },
             "routers": {
-                "lb-http": {
+                f"{config.app_name}-http": {
                     "middlewares": ["redirect-to-https"],
                     "entryPoints": ["http"],
-                    "service": "noop",
+                    "service": config.app_name,
                     "rule": f"Host(`{config.domain}`)"
                 },
-                "lb-https": {
-                    "middlewares": ["gzip"],
+                f"{config.app_name}-https": {
                     "entryPoints": ["https"],
-                    "service": "lb-https",
+                    "service": config.app_name,
+                    "rule": f"Host(`{config.domain}`)",
                     "tls": {
-                        "certResolver": "letsencrypt"
-                    },
-                    "rule": f"Host(`{config.domain}`)"
+                        "certresolver": "letsencrypt"
+                    }
                 }
             },
             "services": {
-                "lb-https": {
+                config.app_name: {
                     "loadBalancer": {
                         "servers": [
-                            {"url": f"http://127.0.0.1:{config.port}"}
-                        ]
-                    }
-                },
-                "noop": {
-                    "loadBalancer": {
-                        "servers": [
-                            {"url": ""}
+                            {"url": f"http://{DOCKER_NETWORK_IP}:{config.port}"}
                         ]
                     }
                 }
@@ -74,7 +69,7 @@ def add_domain_to_traefik(config: TraefikConfig):
     }
 
     with open(dynamic_config_path, 'w') as f:
-        yaml.dump(dynamic_config, f)
+        yaml.dump(dynamic_config, f, default_flow_style=False)
 
     reload_traefik()
 
@@ -85,6 +80,10 @@ def add_domain(config: TraefikConfig):
         return {"message": "Domain added successfully!"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/", include_in_schema=False)
+async def root():
+    return get_swagger_ui_html(openapi_url=app.openapi_url, title=app.title + " - Swagger UI")
 
 if __name__ == "__main__":
     import uvicorn
