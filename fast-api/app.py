@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import os
 import yaml
+import subprocess
 
 app = FastAPI()
 
@@ -18,11 +19,27 @@ class TraefikConfig(BaseModel):
         }
 
 DYNAMIC_CONFIG_DIR = os.getenv("TRAEFIK_DYNAMIC_CONFIG_DIR", "/data/coolify/proxy/dynamic/")
+DOCKER_NETWORK_IP = os.getenv("DOCKER_NETWORK_IP", "host.docker.internal")
 
 def reload_traefik():
     os.system("docker restart coolify-proxy")
 
+def generate_ssl_certificate(domain: str):
+    command = [
+        "certbot", "certonly", "--standalone", "--non-interactive", "--agree-tos",
+        "--email", "cloud@hostspaceng.com", "-d", domain
+    ]
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if result.returncode != 0:
+        raise Exception(f"Certbot failed: {result.stderr.decode()}")
+
 def add_domain_to_traefik(config: TraefikConfig):
+    # Generate SSL certificate for the domain
+    try:
+        generate_ssl_certificate(config.domain)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to generate SSL certificate: {e}")
+
     dynamic_config_path = os.path.join(DYNAMIC_CONFIG_DIR, f"{config.domain}.yaml")
     
     dynamic_config = {
@@ -58,7 +75,7 @@ def add_domain_to_traefik(config: TraefikConfig):
                 "lb-https": {
                     "loadBalancer": {
                         "servers": [
-                            {"url": f"http://127.0.0.1:{config.port}"}
+                            {"url": f"http://{DOCKER_NETWORK_IP}:{config.port}"}
                         ]
                     }
                 },
@@ -85,6 +102,10 @@ def add_domain(config: TraefikConfig):
         return {"message": "Domain added successfully!"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/", include_in_schema=False)
+async def root():
+    return get_swagger_ui_html(openapi_url=app.openapi_url, title=app.title + " - Swagger UI")
 
 if __name__ == "__main__":
     import uvicorn
