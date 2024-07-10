@@ -3,6 +3,14 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from pydantic import BaseModel
 import os
 import yaml
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn="https://99469ea4c40e9fb99e2b1cf9ecfa8fa7@o4507554427895808.ingest.de.sentry.io/4507578012532816",
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+)
+
 
 app = FastAPI()
 
