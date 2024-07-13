@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  db2rest:
+    image: kdhrubo/db2rest:latest
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: ${DB_URL}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
