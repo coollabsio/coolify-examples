@@ -4,7 +4,7 @@ services:
     volumes:
       - uptime-kuma:/app/data
     labels:
-      - caddy=status.example.com
+      - caddy=status.127.0.0.1.sslip.io
       - caddy.reverse_proxy="* {{upstreams 3001}}"
     networks:
       - coolify
