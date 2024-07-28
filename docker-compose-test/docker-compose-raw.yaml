@@ -1,0 +1,25 @@
+services:
+  uptimekuma:
+    image: louislam/uptime-kuma:1.23.13@sha256:96510915e6be539b76bcba2e6873591c67aca8a6075ff09f5b4723ae47f333fc
+    volumes:
+      - uptime-kuma:/app/data
+    labels:
+      - caddy=status.127.0.0.1.sslip.io
+      - caddy.reverse_proxy="* {{upstreams 3001}}"
+    networks:
+      - coolify
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - extra/healthcheck
+      interval: 2s
+      timeout: 10s
+      retries: 15
+
+volumes:
+  uptime-kuma:
+    name: uptime-kuma
+
+networks:
+  coolify:
+    external: true
