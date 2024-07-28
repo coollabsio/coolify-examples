@@ -5,6 +5,9 @@ fastify.register(require('@fastify/cors'))
 fastify.get('/', function (req, reply) {
   return { hello: "from nodejs" }
 })
+fastify.get('/401', function (req, reply) {
+  return reply.code(401).header('Content-Type', 'application/json; charset=utf-8').send({ hello: '401' })
+})
 fastify.get('/env', function (req, reply) {
   return { env: process.env }
 })

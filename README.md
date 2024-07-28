@@ -9,13 +9,15 @@ This repository contains examples of how to deploy applications using Coolify.
 - [x] Vite
 - [x] Bun
 - [x] Astro
+- [x] Rust
+- [x] Laravel
+- [ ] SvelteKit-node
+- [ ] SvelteKit-static
+- [x] Next.js
+- [x] Turbo Next.js
 - [ ] Rails 
 - [ ] Django
-- [x] Laravel
-- [x] SvelteKit-node
-- [x] SvelteKit-static
-- [x] Next.js
-- [x] Turobo Next.js
 - [ ] Turborepo
 - [ ] PHP
 - [ ] React/Preact/Vue/Svelte
+

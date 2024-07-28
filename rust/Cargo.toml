@@ -1,0 +1,8 @@
+[package]
+name = "hello"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+rocket = "0.5.1"

@@ -1,0 +1,74 @@
+version: '3.8'
+services:
+  broker:
+    image: 'docker.io/library/redis:7'
+    restart: unless-stopped
+    volumes:
+      - 'redisdata:/data'
+  db:
+    image: 'docker.io/library/postgres:15'
+    restart: unless-stopped
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+  webserver:
+    image: 'ghcr.io/paperless-ngx/paperless-ngx:latest'
+    restart: unless-stopped
+    depends_on:
+      - db
+      - broker
+    ports:
+      - '9001:8000'
+    volumes:
+      - 'smb_data:/usr/src/paperless/data'
+      - 'smb_media:/usr/src/paperless/media'
+      - 'smb_export:/usr/src/paperless/export'
+      - 'smb_consume:/usr/src/paperless/consume'
+    environment:
+      PAPERLESS_REDIS: 'redis://broker:6379'
+      PAPERLESS_DBHOST: db
+      PAPERLESS_CONSUMER_RECURSIVE: 'true'
+      PAPERLESS_URL: 'https://paperless.paperless.io'
+      PAPERLESS_FILENAME_FORMAT: '{created_year}{created_month}/{correspondent}{title}_{created_year}{created_month}{created_day}'
+      PAPERLESS_SECRET_KEY: 'sdfhaskjdfhasjdfhasljk'
+      PAPERLESS_CONSUMER_BARCODE_UPSCALE: 1.5
+      PAPERLESS_CONSUMER_BARCODE_DPI: 600
+      PAPERLESS_CONSUMER_ENABLE_BARCODES: 'true'
+      PAPERLESS_CONSUMER_ENABLE_TAG_BARCODE: 'true'
+      PAPERLESS_CONSUMER_TAG_BARCODE_MAPPING: '{"[a-fA-F0-9]{64}": "\g<0>"}'
+      PAPERLESS_CONSUMER_BARCODE_SCANNER: ZXING
+      PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: true
+    user: '0:0'
+    cap_add:
+      - SYS_ADMIN
+      - DAC_READ_SEARCH
+    privileged: true
+volumes:
+  smb_data:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //10.10.10.11/paperless-data
+      o: 'username=smbtest,password=smbtest,vers=3.0,uid=0,gid=0,dir_mode=0777,file_mode=0777'
+  smb_media:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //10.10.10.11/paperless-media
+      o: 'username=smbtest,password=smbtest,vers=3.0,uid=0,gid=0,dir_mode=0777,file_mode=0777'
+  smb_export:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //10.10.10.11/paperless-export
+      o: 'username=smbtest,password=smbtest,vers=3.0,uid=0,gid=0,dir_mode=0777,file_mode=0777'
+  smb_consume:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //10.10.10.11/paperless-consume
+      o: 'username=smbtest,password=smbtest,vers=3.0,uid=0,gid=0,dir_mode=0777,file_mode=0777'
+  pgdata: null
