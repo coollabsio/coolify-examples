@@ -5,6 +5,7 @@ This repository contains examples of how to deploy applications using Coolify.
 - [x] Node.js
 - [x] Dockerfile
 - [x] Docker Compose
+- [x] Strapi
 - [x] Nuxt
 - [x] Bun
 - [x] Astro
