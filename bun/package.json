@@ -11,5 +11,8 @@
   },
   "peerDependencies": {
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "bun": "^1.1.21"
   }
 }
