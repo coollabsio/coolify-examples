@@ -15,7 +15,7 @@ services:
       - db-data:/var/lib/postgresql/data
       - ./asd/asd:/asd:ro
       - type: bind
-        source: ./app
+        source: ./app/pg.sql
         target: /app/pg.sql
         content: |
           -- NOTE: change to your own passwords for production environments
