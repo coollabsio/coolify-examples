@@ -1,0 +1,6 @@
+services:
+  app:
+    image: "postgres:14-alpine"
+    volumes:
+      - ./db/migration.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    
