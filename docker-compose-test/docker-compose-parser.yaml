@@ -7,7 +7,7 @@ services:
       APP_DEBUG: '${APP_DEBUG:-false}'
       APP_URL: $SERVICE_FQDN_APP
     volumes:
-      - './:/var/www/html'
-      - './nginx:/etc/nginx'
+      - './html:/var/www/html'
+
 
 
