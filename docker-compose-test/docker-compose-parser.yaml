@@ -12,6 +12,4 @@ services:
     depends_on:
       db:
         condition: service_healthy
-networks:
-  default:
-    ipv4_address: 127.0.0.1
+
