@@ -29,6 +29,3 @@ services:
       interval: 2s
       timeout: 10s
       retries: 10
-networks:
-  default:
-    ipv4_address: 127.0.0.1
