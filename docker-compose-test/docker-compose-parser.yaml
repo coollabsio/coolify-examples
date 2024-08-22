@@ -9,7 +9,5 @@ services:
     volumes:
       - './:/var/www/html'
       - './nginx:/etc/nginx'
-    depends_on:
-      db:
-        condition: service_healthy
+
 
