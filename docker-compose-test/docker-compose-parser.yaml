@@ -26,9 +26,9 @@ services:
         - pg_isready
         - '-U'
         - postgres
-      interval: 30s
+      interval: 2s
       timeout: 10s
-      retries: 5
+      retries: 10
 networks:
   default:
     ipv4_address: 127.0.0.1
