@@ -8,8 +8,8 @@ services:
       APP_DEBUG: '${APP_DEBUG:-false}'
       APP_URL: $SERVICE_FQDN_APP
     volumes:
-      - './:/var/www/html'
-      - './nginx:/etc/nginx'
+      - './html:/var/www/html'
+      - 'test-html:/html'
     depends_on:
       db:
         condition: service_healthy
@@ -18,6 +18,8 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    volumes:
+      - 'data:/var/lib/postgresql/data'
     healthcheck:
       test:
         - CMD
