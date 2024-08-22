@@ -1,3 +1,4 @@
+version: '3.8'
 services:
   app:
     image: nginx
@@ -7,8 +8,25 @@ services:
       APP_DEBUG: '${APP_DEBUG:-false}'
       APP_URL: $SERVICE_FQDN_APP
     volumes:
-      - './html:/var/www/html'
-      - 'test-db:/db'
-
-
-
+      - './:/var/www/html'
+      - './nginx:/etc/nginx'
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - '-U'
+        - postgres
+      interval: 30s
+      timeout: 10s
+      retries: 5
+networks:
+  default:
+    ipv4_address: 127.0.0.1
