@@ -1,0 +1,17 @@
+services:
+  app:
+    image: nginx
+    environment:
+      SERVICE_FQDN_APP: /app
+      APP_KEY: base64
+      APP_DEBUG: '${APP_DEBUG:-false}'
+      APP_URL: $SERVICE_FQDN_APP
+    volumes:
+      - './:/var/www/html'
+      - './nginx:/etc/nginx'
+    depends_on:
+      db:
+        condition: service_healthy
+networks:
+  default:
+    ipv4_address: 127.0.0.1
