@@ -3,6 +3,7 @@ services:
   app:
     image: nginx
     environment:
+      DB_URL: 'postgres://$POSTGRES_USER'
       SERVICE_FQDN_APP: /app
       APP_KEY: base64
       APP_DEBUG: '${APP_DEBUG:-false}'
