@@ -14,7 +14,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      db2:
+      db2
   db:
     image: postgres
     environment:
