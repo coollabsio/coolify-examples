@@ -13,7 +13,6 @@ services:
       - 'test-html:/html'
     depends_on:
       - db
-      - db2
   db:
     image: postgres
     environment:
