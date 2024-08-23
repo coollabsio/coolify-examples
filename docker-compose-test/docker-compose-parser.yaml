@@ -12,8 +12,8 @@ services:
       - './index.html:/usr/share/nginx/html/index.html'
       - 'test-html:/html'
     depends_on:
-      db:
-      db2:
+      - db
+      - db2
   db:
     image: postgres
     environment:
