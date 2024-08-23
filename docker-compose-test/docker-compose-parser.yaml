@@ -9,7 +9,7 @@ services:
       APP_DEBUG: '${APP_DEBUG:-false}'
       APP_URL: $SERVICE_FQDN_APP
     volumes:
-      - './index.html:/var/www/html/index.html'
+      - './index.html:/usr/share/nginx/html/index.html'
       - 'test-html:/html'
     depends_on:
       db:
