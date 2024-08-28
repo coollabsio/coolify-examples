@@ -4,10 +4,8 @@ services:
     image: 'nginx'
     environment:
       DB_URL: 'postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@db/postgres'
-      SERVICE_FQDN_APP: /app
       APP_KEY: base64
       APP_DEBUG: '${APP_DEBUG:-false}'
-      APP_URL: $SERVICE_FQDN_APP
     volumes:
       - './index.html:/usr/share/nginx/html/index.html'
       - 'test-html:/html'
