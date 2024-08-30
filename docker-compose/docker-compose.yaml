@@ -14,6 +14,15 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./asd/asd:/asd:ro
+      - type: bind
+        source: ./app/pg.sql
+        target: /app/pg.sql
+        content: |
+          -- NOTE: change to your own passwords for production environments
+           \set pgpass `echo "$POSTGRES_PASSWORD"`
+
+           ALTER USER authenticator WITH PASSWORD :'pgpass';
+           ALTER USER pgbouncer WITH PASSWORD :'pgpass';
       - /asdf:/asdf
       - type: bind
         source: ./app

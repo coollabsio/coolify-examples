@@ -1,0 +1,19 @@
+name: stream
+services:
+  foo:
+    image: busybox
+    command: echo "I'm running ${COMPOSE_PROJECT_NAME}"
+    restart: no
+  web:
+    image: nginx:latest
+    cap_add:
+      - ALL
+    ports:
+      - "8888:80"
+    annotations:
+      com.example.foo: bar
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: example
+      POSTGRES_DB: exampledb
