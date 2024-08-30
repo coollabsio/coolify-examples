@@ -6,6 +6,7 @@ This repository contains examples of how to deploy applications using Coolify.
 - [x] Dockerfile
 - [x] Docker Compose
 - [x] Nuxt
+- [x] Vite
 - [x] Bun
 - [x] Astro
 - [x] Rust
@@ -18,4 +19,5 @@ This repository contains examples of how to deploy applications using Coolify.
 - [ ] Django
 - [ ] Turborepo
 - [ ] PHP
-- [ ] React/Preact/Vite/Vue/Svelte
+- [ ] React/Preact/Vue/Svelte
+
