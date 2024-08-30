@@ -5,7 +5,6 @@
 - Set the start command to `npm run start`.
    - `npm` could be different depending on the package manager you are using (`Nixpacks` decides based on the lock file).
 - Set the 'Ports Exposes' to `3000,3001`.
-- Set the 'Ports Mapping' to `3000:3000,3001:3001`.
 - That's all.
 
 ## Server build (NodeJS) specific app
