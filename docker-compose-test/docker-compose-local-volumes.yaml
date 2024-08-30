@@ -1,0 +1,8 @@
+services:
+  app:
+    image: "nginx"
+    volumes:
+      - ./db/migration.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./empty:/empty
+      - ./404:/404
+    

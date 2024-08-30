@@ -3,6 +3,7 @@ const PORT = process.env.PORT || 3000
 fastify.register(require('@fastify/cors'))
 
 fastify.get('/', function (req, reply) {
+  console.log('hello');
   return { hello: "from nodejs" }
 })
 fastify.get('/401', function (req, reply) {
