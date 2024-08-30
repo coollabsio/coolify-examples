@@ -1,0 +1,16 @@
+{
+  "name": "vue-server-renderer",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "run-p": "^0.0.0"
+  }
+}
