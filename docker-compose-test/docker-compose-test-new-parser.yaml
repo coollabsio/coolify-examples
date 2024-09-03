@@ -1,0 +1,82 @@
+ervices:
+  db:
+    image: ${POSTGRES_IMAGE:-ghcr.io/getzep/postgres}:${POSTGRES_TAG:-latest}
+    restart: always
+    shm_size: "${POSTGRES_SHM_SIZE:-128mb}"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-postgres}
+    volumes:
+      - zep_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB:-postgres}", "-U", "${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 15s
+      retries: 3
+    ports:
+      - ":5432"
+      - ":10000"
+
+  nlp:
+    image: ${NLP_IMAGE:-ghcr.io/getzep/zep-nlp-server}:${NLP_TAG:-latest}
+    restart: always
+    environment:
+      - ZEP_NLP_SERVER_PORT=${ZEP_NLP_SERVER_PORT:-5557}
+      - ZEP_LOG_LEVEL=${ZEP_LOG_LEVEL:-info}
+      - ZEP_EMBEDDINGS_DEVICE=${ZEP_EMBEDDINGS_DEVICE:-cpu}
+      - ZEP_EMBEDDINGS_MESSAGES_MODEL=${ZEP_EMBEDDINGS_MESSAGES_MODEL:-all-MiniLM-L6-v2}
+      - ZEP_EMBEDDINGS_DOCUMENTS_MODEL=${ZEP_EMBEDDINGS_DOCUMENTS_MODEL:-all-MiniLM-L6-v2}
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/${ZEP_NLP_SERVER_PORT:-5557}' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 45s
+    ports:
+      - ":5557"
+
+  zep:
+    image: ${ZEP_IMAGE:-ghcr.io/getzep/zep}:${ZEP_TAG:-latest}
+    restart: always
+    #depends_on:
+      #db:
+        #condition: service_healthy
+      #nlp:
+        #condition: service_healthy
+    ports:
+      - ":8000"
+    volumes:
+      - zep_config:/app/config
+    build:
+      context: .
+      dockerfile: Dockerfile-mine
+    environment:
+      - ZEP_STORE_POSTGRES_DSN=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-postgres}?sslmode=disable
+      - ZEP_NLP_SERVER_URL=http://nlp:${ZEP_NLP_SERVER_PORT:-5557}
+      - ZEP_OPENAI_API_KEY=${ZEP_OPENAI_API_KEY}
+      - ZEP_AUTH_REQUIRED=${ZEP_AUTH_REQUIRED:-false}
+      - ZEP_AUTH_SECRET=${ZEP_AUTH_SECRET}
+      - ZEP_LLM_SERVICE=${ZEP_LLM_SERVICE:-openai}
+      - ZEP_LLM_MODEL=${ZEP_LLM_MODEL:-gpt-3.5-turbo}
+      - ZEP_MEMORY_MESSAGE_WINDOW=${ZEP_MEMORY_MESSAGE_WINDOW:-12}
+      - ZEP_LOG_LEVEL=${ZEP_LOG_LEVEL:-info}
+      - ZEP_SERVER_MAX_REQUEST_SIZE=${ZEP_SERVER_MAX_REQUEST_SIZE:-5242880}
+      - ZEP_EXTRACTORS_DOCUMENTS_EMBEDDINGS_SERVICE=${ZEP_EXTRACTORS_DOCUMENTS_EMBEDDINGS_SERVICE:-openai}
+      - ZEP_EXTRACTORS_DOCUMENTS_EMBEDDINGS_DIMENSIONS=${ZEP_EXTRACTORS_DOCUMENTS_EMBEDDINGS_DIMENSIONS:-1536}
+      - ZEP_EXTRACTORS_MESSAGES_EMBEDDINGS_SERVICE=${ZEP_EXTRACTORS_MESSAGES_EMBEDDINGS_SERVICE:-openai}
+      - ZEP_EXTRACTORS_MESSAGES_EMBEDDINGS_DIMENSIONS=${ZEP_EXTRACTORS_MESSAGES_EMBEDDINGS_DIMENSIONS:-1536}
+      - ZEP_EXTRACTORS_MESSAGES_SUMMARIZER_EMBEDDINGS_SERVICE=${ZEP_EXTRACTORS_MESSAGES_SUMMARIZER_EMBEDDINGS_SERVICE:-openai}
+      - ZEP_EXTRACTORS_MESSAGES_SUMMARIZER_EMBEDDINGS_DIMENSIONS=${ZEP_EXTRACTORS_MESSAGES_SUMMARIZER_EMBEDDINGS_DIMENSIONS:-1536}
+      - ZEP_STORE_TYPE=postgres
+      - ZEP_SERVER_WEB_ENABLED=true
+    #healthcheck:
+      #test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/8000' || exit 1
+      #interval: 5s
+      #timeout: 10s
+      #retries: 3
+      #start_period: 40s
+
+volumes:
+  zep_postgres_data:
+  zep_config:
