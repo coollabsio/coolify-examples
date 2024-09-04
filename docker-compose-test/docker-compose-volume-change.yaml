@@ -22,4 +22,5 @@ services:
     volumes:
         - traccar_logs:/opt/traccar/logs
         - traccar_config:/opt/traccar/conf/test.xml
+        - test_config:/opt/traccar/logs
     image: traccar/traccar:latest
