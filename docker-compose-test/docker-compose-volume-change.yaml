@@ -1,0 +1,25 @@
+services:
+  traccar-db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
+      MYSQL_DATABASE: traccar
+      MYSQL_USER: traccar
+      MYSQL_PASSWORD: ${MYSQL_PASS}
+    volumes:
+      - traccar_db:/var/lib/mysql
+    healthcheck:
+      test: mariadb-admin -p$$MYSQL_ROOT_PASSWORD ping -h localhost
+      interval: 20s
+      start_period: 10s
+      timeout: 10s
+      retries: 3
+  traccar:
+    restart: unless-stopped
+    depends_on:
+      traccar-db:
+        condition: service_healthy
+    volumes:
+        - traccar_logs:/opt/traccar/logs
+        - traccar_config:/opt/traccar/conf
+    image: traccar/traccar:latest
