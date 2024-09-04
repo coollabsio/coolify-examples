@@ -20,6 +20,6 @@ services:
       traccar-db:
         condition: service_healthy
     volumes:
-        - traccar_logs:/opt/traccar/logs:ro
-        - traccar_config:/opt/traccar/conf/traccar.xml:ro
+        - traccar_logs:/opt/traccar/logs
+        - traccar_config:/opt/traccar/conf
     image: traccar/traccar:latest
