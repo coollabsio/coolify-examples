@@ -19,7 +19,7 @@ ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 ENV NODE_ENV=production
 
 # Run build script
-RUN bun run build
+# RUN bun run build
 
 FROM build AS release
 USER bun
