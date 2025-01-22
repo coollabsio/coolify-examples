@@ -4,7 +4,7 @@ RUN apk add --no-cache git
 
 COPY package.json bun.lockb ./
 # Make sure these files are present before installing
-RUN bun install 
+RUN bun install --frozen-lockfile
 
 # Now copy the rest of your source code
 COPY . .
