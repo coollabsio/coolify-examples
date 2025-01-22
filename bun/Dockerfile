@@ -16,6 +16,8 @@ ARG SOURCE_COMMIT
 # Set the environment variable using the build argument
 ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
+RUN env
+
 ENV NODE_ENV=production
 
 # Run build script
