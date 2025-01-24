@@ -143,16 +143,9 @@ http {
      
         charset utf-8;
      
-
-        $if(NIXPACKS_PHP_FALLBACK_PATH) (
-            location / {
-                try_files $uri $uri/ ${NIXPACKS_PHP_FALLBACK_PATH}?$query_string;
-            }
-        ) else (
-          location / {
-                try_files $uri $uri/ /index.php?$query_string;
-           }
-        )
+        location / {
+            try_files $uri $uri/ ${NIXPACKS_PHP_FALLBACK_PATH:-/index.php}?$query_string;
+        }
      
         location = /favicon.ico { access_log off; log_not_found off; }
         location = /robots.txt  { access_log off; log_not_found off; }
