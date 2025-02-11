@@ -1,9 +1,13 @@
 {
-    "build_pack": "nixpacks",
-    "base_directory": "/nodejs",
-    "publish_directory": "/",
-    "ports_exposes": "3000",
-    "settings": {
-        "is_static": false
+  "$schema": "https://cdn.coollabs.io/coolify/coolify.schema.json",
+  "build": {
+    "build_pack": "dockerfile",
+    "base_directory": "/dockerfile"
+  },
+  "network": {
+    "ports": {
+      "expose": "80",
+      "mappings": "8888:80"
     }
+  }
 }
