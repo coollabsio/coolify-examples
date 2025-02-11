@@ -1,0 +1,14 @@
+{
+    "name": "Pure Dockerfile",
+    "build": {
+        "build_pack": "dockerfile",
+        "dockerfile": {
+            "content": "FROM nginx:latest"
+        }
+    },
+    "network": {
+        "ports": {
+            "expose": "80"
+        }
+    }
+}
