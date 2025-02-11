@@ -1,10 +1,7 @@
 {
-    "name": "Pure Dockerfile",
+    "name": "Git Based Dockerfile",
     "build": {
-        "build_pack": "dockerfile",
-        "dockerfile": {
-            "content": "FROM nginx:latest"
-        }
+        "build_pack": "dockerfile"
     },
     "network": {
         "ports": {
