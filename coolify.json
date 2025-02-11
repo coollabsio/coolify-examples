@@ -5,6 +5,9 @@
     "base_directory": "/dockerfile"
   },
   "network": {
+    "domains": {
+      "fqdn": "http://hellotwitter.127.0.0.1.sslip.io"
+    },
     "ports": {
       "expose": "80",
       "mappings": "8888:80"
