@@ -1,6 +1,7 @@
 /coverage
 /src/client/shared.ts
 /src/node/shared.ts
+/.vitepress/cache/** */
 *.log
 *.tgz
 .DS_Store
