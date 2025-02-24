@@ -3,10 +3,10 @@ nixPkgs = ['bun']
 aptPkgs = ['build-essential']
 
 [phases.install]
-cmd = "bun install"
+cmds = ["bun install"]
 
 [phases.build]
-cmd = "bun run build"
+cmds = ["bun run build"]
 
-[phases.start]
+[start]
 cmd = "bun run start"
