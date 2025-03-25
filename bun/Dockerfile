@@ -1,5 +1,5 @@
 FROM oven/bun:1.1.45-alpine AS base
-RUN apk add --no-cache git
+RUN apk add --no-cache git wget
 
 WORKDIR /app
 
