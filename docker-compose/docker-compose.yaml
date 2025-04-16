@@ -6,6 +6,7 @@ services:
     ports:
       - "3000"
     environment:
+      - FQDN=${SERVICE_FQDN_API}
       - PORT=3000
       - DB_CONNECTION=postgres
       - TEST=${TEST}
