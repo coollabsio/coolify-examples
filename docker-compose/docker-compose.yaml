@@ -9,6 +9,7 @@ services:
       - PORT=3000
       - DB_CONNECTION=postgres
       - TEST=${TEST}
+      - TEST_PASSWORD=${SERVICE_PASSWORD_TEST}
   database:
     image: postgres:14-alpine
     volumes:
