@@ -11,7 +11,7 @@ services:
       - PORT=3000
       - DB_CONNECTION=postgres
       - TEST=${TEST}
-  analytics_test_2:
+  analytics:
     image: nginx
     environment:
       - API_URL=$SERVICE_FQDN_API
