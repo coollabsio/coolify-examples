@@ -12,6 +12,8 @@ services:
       - DB_CONNECTION=postgres
       - TEST=${TEST}
       - TEST_PASSWORD=$SERVICE_PASSWORD_64_API
+    volumes:
+      - test_db:/var/lib/mysql
   analytics:
     image: nginx
     environment:
