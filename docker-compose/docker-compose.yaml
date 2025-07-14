@@ -37,3 +37,7 @@ services:
     environment:
       - POSTGRES_DB=database
       - POSTGRES_PASSWORD=password
+  db:
+    image: nginx
+  another-api:
+    image: nginx
