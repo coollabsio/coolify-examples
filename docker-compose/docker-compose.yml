@@ -8,6 +8,7 @@ services:
     ports:
       - "3000"
     environment:
+      - URL=SERVICE_URL_MY-SERVICE-NAME
       - PORT=3000
       - DB_CONNECTION=postgres
       - TEST=${TEST}
