@@ -1,0 +1,12 @@
+services:
+  api:
+    image: nginx
+  analytics:
+    image: nginx
+    environment:
+      - API_URL=$SERVICE_FQDN_API
+      - ANOTHER_URL=$SERVICE_FQDN_ANOTHER_SERVICE
+  another-service:
+    image: nginx
+    environment:
+      - API_URL=$SERVICE_FQDN_API
