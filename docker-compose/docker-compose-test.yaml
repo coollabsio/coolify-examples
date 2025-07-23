@@ -4,9 +4,9 @@ services:
   analytics:
     image: nginx
     environment:
-      - API_URL=$SERVICE_FQDN_API
+      - API_URL=$SERVICE_URL_API
       - ANOTHER_URL=$SERVICE_FQDN_ANOTHER_SERVICE
   another-service:
     image: nginx
     environment:
-      - API_URL=$SERVICE_FQDN_API
+      - API_FQDN=$SERVICE_FQDN_API
