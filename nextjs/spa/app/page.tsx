@@ -8,7 +8,7 @@ export default function Home() {
         rel="noopener noreferrer"
         className="bg-blue-500 text-white p-2 rounded-md inline-block"
       >
-        Click me
+        Change the button label
       </a>
     </div>
   );
