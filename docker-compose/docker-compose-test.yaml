@@ -6,10 +6,6 @@ services:
     environment:
       - API_URL=$SERVICE_URL_API
       - ANOTHER_URL=$SERVICE_FQDN_ANOTHER_SERVICE
-    volumes:
-      - 'gitea-data:/data'
-      - 'gitea-timezone:/etc/timezone:ro'
-      - 'gitea-localtime:/etc/localtime:ro'
   another-service:
     image: nginx
     environment:
