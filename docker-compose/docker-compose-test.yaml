@@ -6,11 +6,18 @@ services:
     environment:
       - API_URL=$SERVICE_URL_API
       - ANOTHER_URL=$SERVICE_FQDN_ANOTHER_SERVICE
-    volumes:
-      - 'gitea-data:/data'
-      - 'gitea-timezone:/etc/timezone:ro'
-      - 'gitea-localtime:/etc/localtime:ro'
+    depends_on:
+      another-service:
+        condition: service_started
   another-service:
     image: nginx
     environment:
       - API_FQDN=$SERVICE_FQDN_API
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'wget -qO- 127.0.0.1:80'
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 1s
