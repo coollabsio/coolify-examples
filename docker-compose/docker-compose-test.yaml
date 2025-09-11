@@ -1,4 +1,6 @@
 services:
+  api.test:
+    image: nginx
   api:
     image: nginx
   analytics:
