@@ -9,5 +9,3 @@ RUN echo "Hello, World about!" > /usr/share/nginx/html/about.html
 FROM base AS builder
 RUN echo -e "\e[1;33mENVIRONMENT VARIABLES\e[0m"
 RUN env
-
-
