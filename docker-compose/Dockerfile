@@ -1,7 +1,7 @@
 FROM oven/bun
 WORKDIR /app
 COPY . /app
-ENV TEST=$TEST
 RUN env
+RUN echo "Build-time NPM_TOKEN is: $NPM_TOKEN"
 RUN bun install
 CMD bun start
