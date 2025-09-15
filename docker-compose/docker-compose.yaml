@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        TEST=$TEST
     ports:
       - "3000"
     environment:
