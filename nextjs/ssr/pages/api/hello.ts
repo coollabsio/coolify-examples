@@ -9,5 +9,5 @@ export default function handler(
   res: NextApiResponse<ResponseData>
 ) {
   console.log(process.env.OPENAPI)
-  res.status(200).json({ message: 'Hello from Next.js!' })
+  res.status(200).json({ message: "Hello from Next.js! Your key is " + process.env.OPENAPI })
 }
