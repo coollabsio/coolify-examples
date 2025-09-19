@@ -1,5 +1,5 @@
 FROM oven/bun
-ARG NPM_TOKEN
+ENV NPM_TOKEN
 WORKDIR /app
 COPY . /app
 RUN env
