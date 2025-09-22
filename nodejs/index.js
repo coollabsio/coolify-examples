@@ -6,8 +6,14 @@ fastify.get('/', function (req, reply) {
   console.log('hello');
   return { hello: "from nodejs" }
 })
+fastify.get('/300', function (req, reply) {
+  return reply.code(300).header('Content-Type', 'application/json; charset=utf-8').send({ hello: '300' })
+})
 fastify.get('/401', function (req, reply) {
   return reply.code(401).header('Content-Type', 'application/json; charset=utf-8').send({ hello: '401' })
+})
+fastify.get('/500', function (req, reply) {
+  return reply.code(500).header('Content-Type', 'application/json; charset=utf-8').send({ hello: '500' })
 })
 fastify.get('/env', function (req, reply) {
   return { env: process.env }
