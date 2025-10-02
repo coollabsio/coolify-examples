@@ -1,15 +1,15 @@
 #!/bin/bash
 set -e
 
-# Validate SSH key
+# Validate SSH private key
 if [ -n "$KEY" ]; then
-  echo "Validating SSH key..."
-  echo "$KEY"
-  echo "$KEY" | ssh-keygen -l -f - > /dev/null 2>&1
+  echo "Validating SSH private key..."
+  echo "$KEY" | ssh-keygen -y -f -
   if [ $? -eq 0 ]; then
-    echo "✓ SSH key is valid"
+    echo "✓ SSH private key is valid"
   else
-    echo "✗ SSH key is invalid"
+    echo "✗ SSH private key is invalid"
+    exit 1
   fi
 else
   echo "⚠ KEY environment variable not set, skipping validation"
