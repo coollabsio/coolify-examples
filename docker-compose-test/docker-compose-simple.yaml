@@ -1,0 +1,5 @@
+services:
+  api:
+    image: nginx
+  analytics:
+    image: nginx
