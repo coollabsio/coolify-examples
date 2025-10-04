@@ -1,5 +1,7 @@
 services:
   api:
     image: nginx
+    environment:
+      - SENTRY_RELEASE
   analytics:
     image: nginx
