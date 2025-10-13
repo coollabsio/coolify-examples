@@ -12,15 +12,9 @@ COPY . .
 
 FROM base AS build
 
-# Declare the build argument
-ARG SOURCE_COMMIT
-# Set the environment variable using the build argument
-ENV SOURCE_COMMIT=${SOURCE_COMMIT}
-
 ENV NODE_ENV=production
 
-# Run build script
-# RUN bun run build
+RUN bun run build
 
 FROM build AS release
 USER bun
