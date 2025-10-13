@@ -16,7 +16,7 @@ COPY . .
 
 #RUN bun run build
 
-FROM build AS release
+FROM base AS release
 USER bun
 EXPOSE 3000/tcp
 ENTRYPOINT [ "bun", "run", "index.ts" ]
