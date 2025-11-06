@@ -10,7 +10,7 @@ COPY prisma ./
 
 # Install dependencies based on the preferred package manager
 
-COPY package.json bun.lock
+COPY package.json bun.lock .
 
 RUN npm i
 
