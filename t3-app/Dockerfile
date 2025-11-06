@@ -25,7 +25,7 @@ COPY . .
 
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN npx prisma generate && npm run build && npm cache clean --force"
+RUN npx prisma generate && npm run build && npm cache clean --force
 
 ##### RUNNER
 
