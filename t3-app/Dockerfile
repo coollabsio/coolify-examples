@@ -12,7 +12,7 @@ COPY prisma ./
 
 COPY package.json bun.lock
 
-RUN bun i
+RUN npm i
 
 ##### BUILDER
 
@@ -25,7 +25,7 @@ COPY . .
 
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN bunx prisma generate && bun run build
+RUN npx prisma generate && npm run build && npm cache clean --force"
 
 ##### RUNNER
 
