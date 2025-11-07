@@ -1,8 +1,6 @@
 services:
   database:
-    build:
-      context: './mysql'
-    restart: always
+    image: nginx
     environment:
       - BACKUP_HEARTBEAT_URL=${DB_BACKUP_HEARTBEAT_URL}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
