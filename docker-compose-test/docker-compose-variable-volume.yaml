@@ -1,0 +1,19 @@
+services:
+  database:
+    build:
+      context: './mysql'
+    restart: always
+    environment:
+      - BACKUP_HEARTBEAT_URL=${DB_BACKUP_HEARTBEAT_URL}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - type: bind
+        source: ${VOLUMES_PATH}/mysql
+        target: /var/lib/mysql
+        # noinspection ComposeUnknownKeys
+        is_directory: true
+      - type: bind
+        source: ${VOLUMES_PATH}/mysql-backup
+        target: /backup
+        # noinspection ComposeUnknownKeys
+        is_directory: true
