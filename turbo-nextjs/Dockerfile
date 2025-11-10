@@ -11,14 +11,13 @@ WORKDIR /app
 # Copy package.json and pnpm-lock.yaml before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
 COPY package.json ./
-COPY pnpm-lock.yaml ./
 RUN echo "node-linker=hoisted" >> .npmrc
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 # Install dependencies
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 
 # Build the Next.js app
 FROM base AS builder
