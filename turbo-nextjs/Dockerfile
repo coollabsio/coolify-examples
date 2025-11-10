@@ -11,13 +11,14 @@ WORKDIR /app
 # Copy package.json and pnpm-lock.yaml before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
 COPY package.json ./
+COPY pnpm-lock.yaml ./
 RUN echo "node-linker=hoisted" >> .npmrc
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 # Install dependencies
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store npm install
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 # Build the Next.js app
 FROM base AS builder
@@ -53,13 +54,14 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public/ ./public/
+COPY --from=builder /app/apps/web/.next/standalone ./
+COPY --from=builder /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=builder /app/apps/web/public/ ./apps/web/public/
 
 # Expose the listening port
 EXPOSE 3000
 ENV PORT 3000
 
 # Run node to launch the app
-CMD ["node", "server.js"]
+CMD ["node", "apps/web/server.js"]
+

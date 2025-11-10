@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "start": "node apps/web/.next/standalone/apps/web/server.js",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
@@ -16,7 +17,7 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "npm@9.8.1",
+  "packageManager": "pnpm@8.15.0",
   "workspaces": [
     "apps/*",
     "packages/*"
