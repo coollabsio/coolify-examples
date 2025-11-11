@@ -6,7 +6,6 @@ RUN npm install -g pnpm@10.5.2
 
 # Build the Next.js app
 FROM base AS builder
-ENV NODE_ENV production
 
 RUN apk --no-cache upgrade && apk add --no-cache chromium
 

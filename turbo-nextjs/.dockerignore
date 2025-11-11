@@ -1,0 +1,14 @@
+node_modules
+.next
+.turbo
+dist
+.git
+.gitignore
+README.md
+.env*.local
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
