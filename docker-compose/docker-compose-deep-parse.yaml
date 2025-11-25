@@ -1,0 +1,5 @@
+services:
+  yolo_service:
+   environment:
+    FOO_BAR: '123' #foobar
+    API: '${API_URL:-${SERVICE_URL_YOLO}/api}' #apiyolo
