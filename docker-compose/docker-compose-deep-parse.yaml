@@ -1,5 +1,6 @@
 services:
-  yolo_service:
+  yolo:
+   image: nginx
    environment:
     FOO_BAR: '123' #foobar
     API: '${API_URL:-${SERVICE_URL_YOLO}/api}' #apiyolo
