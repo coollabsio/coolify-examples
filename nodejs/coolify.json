@@ -1,9 +1,19 @@
 {
-    "build_pack": "nixpacks",
-    "base_directory": "/nodejs",
-    "publish_directory": "/",
-    "ports_exposes": "3001",
-    "settings": {
-        "is_static": false
-    }
+  "version": "1.0",
+  "name": "test-app",
+  "build": {
+    "type": "nixpacks",
+    "install_command": "npm install",
+    "build_command": "npm run build",
+    "start_command": "npm start"
+  },
+  "domains": {
+    "ports_exposes": "3000"
+  },
+  "environment_variables": {
+    "production": [
+      {"key": "DB_PASSWORD", "value": "SERVICE_PASSWORD_64"},
+      {"key": "APP_SECRET", "value": "SERVICE_BASE64_32"}
+    ]
+  }
 }
