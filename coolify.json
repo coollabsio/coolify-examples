@@ -1,16 +1,19 @@
 {
-  "$schema": "https://cdn.coollabs.io/coolify/coolify.schema.json",
+  "version": "1.0",
+  "name": "test-app",
   "build": {
-    "build_pack": "dockerfile",
-    "base_directory": "/dockerfile"
+    "type": "nixpacks",
+    "install_command": "npm install",
+    "build_command": "npm run build",
+    "start_command": "npm start"
   },
-  "network": {
-    "domains": {
-      "fqdn": "http://hellotwitter.127.0.0.1.sslip.io"
-    },
-    "ports": {
-      "expose": "80",
-      "mappings": "8888:80"
-    }
+  "domains": {
+    "ports_exposes": "3000"
+  },
+  "environment_variables": {
+    "production": [
+      {"key": "DB_PASSWORD", "value": "SERVICE_PASSWORD_64"},
+      {"key": "APP_SECRET", "value": "SERVICE_BASE64_32"}
+    ]
   }
 }
