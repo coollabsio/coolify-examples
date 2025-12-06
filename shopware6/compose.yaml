@@ -1,0 +1,53 @@
+
+services:
+###> shopware/core ###
+  database:
+    image: mariadb:11.8
+    environment:
+      MARIADB_DATABASE: shopware
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: shopware
+      MARIADB_PASSWORD: shopware
+    volumes:
+      - db-data:/var/lib/mysql:rw
+    command:
+      - --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+      - --log_bin_trust_function_creators=1
+      - --binlog_cache_size=16M
+      - --key_buffer_size=0
+      - --join_buffer_size=1024M
+      - --innodb_log_file_size=128M
+      - --innodb_buffer_pool_size=1024M
+      - --innodb_buffer_pool_instances=1
+      - --group_concat_max_len=320000
+      - --default-time-zone=+00:00
+      - --max_binlog_size=512M
+      - --binlog_expire_logs_seconds=86400
+    healthcheck:
+      test: [ "CMD", "mariadb-admin" ,"ping", "-h", "localhost", "-proot" ]
+      start_period: 10s
+      start_interval: 3s
+      interval: 5s
+      timeout: 1s
+      retries: 10
+###< shopware/core ###
+
+###> shopware/elasticsearch ###
+  opensearch:
+    image: opensearchproject/opensearch:2
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    environment:
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: 'c3o_ZPHo!'
+      discovery.type: single-node
+      plugins.security.disabled: 'true'
+###< shopware/elasticsearch ###
+
+volumes:
+###> shopware/core ###
+  db-data:
+###< shopware/core ###
+
+###> shopware/elasticsearch ###
+  opensearch-data:
+###< shopware/elasticsearch ###
