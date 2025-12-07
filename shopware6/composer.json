@@ -8,6 +8,7 @@
     "shopware/core": "v6.7.5.0",
     "shopware/elasticsearch": "*",
     "shopware/storefront": "*",
+    "shopware/deployment-helper": "*",
     "symfony/flex": "~2"
   },
   "repositories": [
