@@ -68,7 +68,7 @@ services:
       init-perm:
         condition: service_completed_successfully
 
-  worker:
+  worker-1: &worker
     image: shopware6
     <<: *shopware
     build:
@@ -87,6 +87,7 @@ services:
         "--time-limit=300",
         "--memory-limit=512M",
       ]
+  worker-2: *worker
 
   scheduled-task:
     image: shopware6
