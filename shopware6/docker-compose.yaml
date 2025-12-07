@@ -63,6 +63,7 @@ services:
     build:
       context: .
     entrypoint: /setup
+    restart: "no"
     depends_on:
       database:
         condition: service_healthy
