@@ -62,7 +62,7 @@ services:
     <<: *shopware
     build:
       context: .
-    entrypoint: /setup
+    entrypoint: /bin/sh -c "sleep 3600" # Keep alive for 1 hour
     restart: "no"
     depends_on:
       database:
