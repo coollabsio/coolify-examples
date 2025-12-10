@@ -85,7 +85,8 @@ services:
         "php",
         "bin/console",
         "messenger:consume",
-        "async low_priority",
+        "async",
+        "low_priority",
         "--time-limit=300",
         "--memory-limit=512M",
       ]
