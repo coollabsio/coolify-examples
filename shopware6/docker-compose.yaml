@@ -36,6 +36,12 @@ services:
       JWT_PUBLIC_KEY: "${JWT_PUBLIC_KEY}"
       PHP_SESSION_HANDLER: "${PHP_SESSION_HANDLER}"
       PHP_SESSION_SAVE_PATH: "${PHP_SESSION_SAVE_PATH}"
+    healthcheck:
+      test:
+        ["CMD", "curl", "-f", "http://localhost:8000/api/_info/health-check"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   database:
     image: mariadb:11.4
@@ -56,6 +62,7 @@ services:
     <<: *shopware
     command: chown 82:82 /var/www/html/files /var/www/html/public/theme /var/www/html/public/media /var/www/html/public/thumbnail /var/www/html/public/sitemap
     restart: "no"
+    exclude_from_hc: true
 
   init:
     image: shopware6
@@ -64,6 +71,7 @@ services:
       context: .
     entrypoint: ["php", "vendor/bin/shopware-deployment-helper", "run"]
     restart: "no"
+    exclude_from_hc: true
     depends_on:
       database:
         condition: service_healthy
@@ -75,6 +83,7 @@ services:
     <<: *shopware
     build:
       context: .
+    exclude_from_hc: true
     volumes_from:
       - init
     depends_on:
@@ -103,6 +112,7 @@ services:
       init:
         condition: service_completed_successfully
     entrypoint: ["php", "bin/console", "scheduled-task:run"]
+    exclude_from_hc: true
 
   cache:
     image: valkey/valkey:latest
