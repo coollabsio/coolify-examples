@@ -7,9 +7,6 @@ Bun.serve({
         if (url.pathname === "/blog") return new Response("Blog!");
         if (url.pathname === "/about") return new Response("About!");
         if (url.pathname === "/x") return new Response("x");
-        if (url.pathname === "/y") return new Response("y");
-        if (url.pathname === "/a") return new Response("a");
-        if (url.pathname === "/b") return new Response("b");
         if (url.pathname === "/201") return new Response("201", { status: 201 });
         if (url.pathname === "/202") return new Response("202", { status: 202 });
         return new Response("404!");
