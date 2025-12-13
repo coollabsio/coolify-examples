@@ -3,7 +3,7 @@
 ARG BASE_IMAGE=shopware/docker-base:8.3
 
 # pin versions
-FROM ghcr.io/shopware/docker-base:8.3 as base-image
+FROM ${BASE_IMAGE} as base-image
 FROM ghcr.io/shopware/shopware-cli:latest-php-8.3 AS shopware-cli
 
 # build
