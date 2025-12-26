@@ -1,0 +1,27 @@
+{
+  "provider": "node",
+  "language": "nodejs",
+  "language_version": "24",
+  "framework": "vite",
+  "framework_version": "7.2.4",
+  "package_manager": "npm",
+  "install_command": "npm ci",
+  "build_command": "npm run build",
+  "start_command": "npm run start",
+  "detected_files": [
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json"
+  ],
+  "metadata": {
+    "custom_packages": [
+      "curl",
+      "wget",
+      "ffmpeg"
+    ],
+    "module_type": "module",
+    "name": "static",
+    "output_type": "static",
+    "version": "0.0.0"
+  }
+}

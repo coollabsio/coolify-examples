@@ -1,7 +1,0 @@
-services:
-  caddy:
-    image: caddy
-    ports:
-      - 2015:2015
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile

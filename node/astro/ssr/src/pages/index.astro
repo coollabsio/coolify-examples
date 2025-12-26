@@ -1,0 +1,42 @@
+---
+// Build-time public var (baked into bundle)
+const buildPublicVar = import.meta.env.PUBLIC_BUILD_PUBLIC_VAR || 'default-value';
+
+// Runtime env vars (read at server startup)
+const runtimePrivateVar = process.env.RUNTIME_PRIVATE_VAR || 'default-value';
+const runtimePublicVar = process.env.RUNTIME_PUBLIC_VAR || 'default-value';
+
+console.log('=== Build-time Variables ===');
+console.log('PUBLIC_BUILD_PUBLIC_VAR:', buildPublicVar);
+console.log('=== Runtime Variables ===');
+console.log('RUNTIME_PRIVATE_VAR:', runtimePrivateVar);
+console.log('RUNTIME_PUBLIC_VAR:', runtimePublicVar);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<div style="padding: 20px; background: #f0f0f0; margin: 20px; border-radius: 8px;">
+			<h2>Environment Variable Test</h2>
+			<h3>Build-time (baked into bundle)</h3>
+			<p><strong>PUBLIC_BUILD_PUBLIC_VAR:</strong> {buildPublicVar}</p>
+			<h3>Runtime (read at server startup)</h3>
+			<p><strong>RUNTIME_PRIVATE_VAR:</strong> {runtimePrivateVar}</p>
+			<p><strong>RUNTIME_PUBLIC_VAR:</strong> {runtimePublicVar}</p>
+		</div>
+		<h1>Astro</h1>
+		<script define:vars={{ buildPublicVar, runtimePrivateVar, runtimePublicVar }}>
+			console.log('=== Build-time Variables ===');
+			console.log('PUBLIC_BUILD_PUBLIC_VAR:', buildPublicVar);
+			console.log('=== Runtime Variables ===');
+			console.log('RUNTIME_PRIVATE_VAR:', runtimePrivateVar);
+			console.log('RUNTIME_PUBLIC_VAR:', runtimePublicVar);
+		</script>
+	</body>
+</html>

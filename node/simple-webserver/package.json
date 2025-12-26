@@ -1,0 +1,11 @@
+{
+  "name": "simple-webserver",
+  "version": "1.0.0",
+  "description": "A simple backend webserver written in nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "license": "MIT"
+}

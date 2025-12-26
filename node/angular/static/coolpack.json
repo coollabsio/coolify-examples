@@ -1,0 +1,27 @@
+{
+  "provider": "node",
+  "language": "nodejs",
+  "language_version": "24",
+  "framework": "angular",
+  "framework_version": "21.0.0",
+  "package_manager": "npm",
+  "package_manager_version": "11.6.2",
+  "install_command": "npm ci",
+  "build_command": "npm run build",
+  "start_command": "npm run start",
+  "detected_files": [
+    "package.json",
+    "tsconfig.json",
+    "angular.json"
+  ],
+  "metadata": {
+    "custom_packages": [
+      "curl",
+      "wget",
+      "ffmpeg"
+    ],
+    "name": "static",
+    "output_type": "static",
+    "version": "0.0.0"
+  }
+}

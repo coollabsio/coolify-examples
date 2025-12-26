@@ -1,0 +1,16 @@
+{
+  "name": "ssr",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "start": "node ./dist/server/entry.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.5.1",
+    "astro": "^5.16.4"
+  }
+}

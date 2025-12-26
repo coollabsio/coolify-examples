@@ -1,0 +1,12 @@
+{
+  "name": "eleventy",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "start": "npx serve@latest _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}
