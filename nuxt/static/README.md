@@ -30,7 +30,6 @@ CMD ["nginx", "-g", "daemon off;"]
 ```toml
 [phases.setup]
 nixpkgsArchive = '51ad838b03a05b1de6f9f2a0fffecee64a9788ee'
-aptPkgs = ["openssh-client"]
 ```
 
 2. Select `Nixpacks` as the `Build Pack` in Coolify.
