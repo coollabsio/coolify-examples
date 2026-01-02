@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const fastify = require('fastify')({ logger: {level: "error"}, trustProxy: true })
 const PORT = process.env.PORT || 3000
 fastify.register(require('@fastify/cors'))
