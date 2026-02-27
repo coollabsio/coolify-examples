@@ -6,7 +6,7 @@ fastify.register(require('@fastify/cors'))
 
 fastify.get('/', function (req, reply) {
   console.log('hello');
-  return { hello: "from nodejs" }
+  return { hello: "from nodejs #2" }
 })
 fastify.get('/300', function (req, reply) {
   return reply.code(300).header('Content-Type', 'application/json; charset=utf-8').send({ hello: '300' })
