@@ -1,0 +1,8 @@
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - type: bind
+        source: '${CONFIG_FILE:-./default-config.yaml}'
+        target: /etc/nginx/conf.d/custom.conf
+        read_only: true
