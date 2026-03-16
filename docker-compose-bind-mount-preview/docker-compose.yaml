@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "0:80"
+    volumes:
+      - ./static:/var/www/static:ro
+    depends_on:
+      - web
+
+  web:
+    image: alpine:latest
+    command: ["sh", "-c", "echo 'hello' > /var/www/static/index.html && sleep infinity"]
+    volumes:
+      - ./static:/var/www/static
