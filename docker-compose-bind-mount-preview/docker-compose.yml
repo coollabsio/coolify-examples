@@ -1,0 +1,42 @@
+services:
+
+  postgres:
+    image: postgres:16.4
+    container_name: postgres_test
+    restart: always
+    environment:
+      POSTGRES_USER: ${COMPOSE__POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${COMPOSE__POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${COMPOSE__POSTGRES_DB:-postgres}
+    expose:
+      - "5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+
+  db_bootstrap:
+    image: postgres:16.4
+    container_name: db_bootstrap_test
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: ${COMPOSE__POSTGRES_HOST:-postgres}
+      DB_NAME: ${COMPOSE__POSTGRES_DB:-postgres}
+      DB_USER: ${COMPOSE__POSTGRES_USER:-postgres}
+      PGPASSWORD: ${COMPOSE__POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - ./scripts:/scripts:ro
+    entrypoint: [ "bash", "/scripts/bootstrap_db.sh" ]
+    restart: "no"
+
+  main_service:
+    image: nginx:latest
+    container_name: nginx_server
+    ports:
+      - '0:80'
+    depends_on:
+      db_bootstrap:
+        condition: service_completed_successfully
