@@ -19,6 +19,8 @@ Example applications for deploying to [Coolify](https://coolify.io).
 | [fastify](./node/fastify) | Fastify web framework |
 | [nestjs](./node/nestjs) | NestJS framework |
 | [adonisjs](./node/adonisjs) | AdonisJS framework |
+| [hono](./node/hono) | Hono web framework |
+| [koa](./node/koa) | Koa web framework |
 
 ### Frontend Frameworks
 
@@ -31,9 +33,13 @@ Example applications for deploying to [Coolify](https://coolify.io).
 | [sveltekit](./node/sveltekit) | [ssr](./node/sveltekit/ssr) | [static](./node/sveltekit/static) |
 | [tanstack-start](./node/tanstack-start) | [ssr](./node/tanstack-start/ssr) | [static](./node/tanstack-start/static) |
 | [angular](./node/angular) | [ssr](./node/angular/ssr) | [static](./node/angular/static) |
+| [vue](./node/vue) | [ssr](./node/vue/ssr) | [static](./node/vue/static) |
+| [qwik](./node/qwik) | [ssr](./node/qwik/ssr) | [static](./node/qwik/static) |
+| [react](./node/react) | - | [static](./node/react) |
 | [vite](./node/vite) | - | [static](./node/vite) |
 | [eleventy](./node/eleventy) | - | [static](./node/eleventy) |
 | [gatsby](./node/gatsby) | - | [static](./node/gatsby) |
+| [docusaurus](./node/docusaurus) | - | [static](./node/docusaurus) |
 
 ## SSR vs Static
 
