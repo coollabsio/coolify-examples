@@ -1,0 +1,14 @@
+{
+  "name": "koa-webserver",
+  "version": "1.0.0",
+  "description": "A simple backend webserver written in Koa",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.15.0"
+  }
+}
