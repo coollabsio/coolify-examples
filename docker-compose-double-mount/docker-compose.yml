@@ -1,0 +1,10 @@
+services:
+  web1:
+    image: nginx:alpine
+    volumes:
+      - ./index1.html:/usr/share/nginx/html/index.html:ro
+
+  web2:
+    image: nginx:alpine
+    volumes:
+      - ./index2.html:/usr/share/nginx/html/index.html
