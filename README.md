@@ -6,7 +6,8 @@
 
 This repository contains examples of how to deploy applications using [Coolify](https://coolify.io).
 
-The examples are grouped as **language / category / example**.
+The examples are grouped as **language / example**. A language keeps a
+category level (such as `frameworks/`) only when it has more than one category.
 
 ## Structure
 
@@ -19,18 +20,19 @@ The examples are grouped as **language / category / example**.
 | `runtimes/` | `bun`, `nodejs` |
 
 ### php/
-| Category | Examples |
+| Type | Examples |
 | --- | --- |
-| `frameworks/` | `laravel`, `laravel-inertia`, `laravel-pure`, `symfony`, `shopware6` |
+| Frameworks | `laravel`, `laravel-inertia`, `laravel-pure`, `symfony` |
+| CMS | `shopware6` (built with Symfony) |
 
 ### Other languages
 | Path | Example |
 | --- | --- |
-| `python/frameworks/` | `flask` |
-| `ruby/frameworks/` | `rails` |
-| `elixir/frameworks/` | `phoenix` |
-| `go/frameworks/` | `gin` |
-| `rust/frameworks/` | `rocket` |
+| `python/` | `flask` |
+| `ruby/` | `rails` |
+| `elixir/` | `phoenix` |
+| `go/` | `gin` |
+| `rust/` | `rocket` |
 
 ### Build methods and static
 | Path | Examples |
