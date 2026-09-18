@@ -37,6 +37,7 @@ The examples are grouped as **language / category / example**.
 | --- | --- |
 | `dockerfile/` | `single-stage`, `multi-stage` |
 | `static/` | Plain static HTML site |
+| `github-actions/` | Build with GitHub Actions and deploy to Coolify |
 
 ## Internal
 
